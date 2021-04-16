@@ -11,7 +11,7 @@ We chose to use the incremental development life cycle. This life cycle is ideal
 
 # How does Nova work?
 
-Nova was developed in python and uses natural language processing to understand and converse with the user. She takes the input from the user and cleans the sentences into a condensed and easily-readable format. As part of the cleaning, Nova checks if the users question is in English and if not, translates it into English so she can understand it. She then compares the input to the questions she has in her questionbank and gives a response based on the similarity between the input and questionbank questions. All the questions and responses are found inside the corpus.txt file and may be expanded or changed as more astronomy or geography questions are thought of. Nova also has the ability to query wikipedia when she doesn't understand a question Once Nova chooses a proper response she checks whcih language the user asked the question in and translaters her question into the target language.
+Nova was developed in python and uses natural language processing to understand and converse with the user. She takes the input from the user and cleans the sentences into a condensed and easily-readable format. As part of the cleaning, Nova checks if the users question is in English and if not, translates it into English so she can understand it. She then compares the input to the questions she has in her questionbank and gives a response based on the similarity between the input and questionbank questions. All the questions and responses are found inside the corpus.txt file and may be expanded or changed as more astronomy or geography questions are thought of. Nova also has the ability to query wikipedia when she doesn't understand a question and directs the user to the relevant wikipedia page for more information. Once Nova chooses a proper response she checks whcih language the user asked the question in and translaters her question into the target language.
 
 # Requirements
 
@@ -57,6 +57,8 @@ You will need to download and install NLTK and Spacy in your python IDE before u
   - `Input: what is a white dwarf?`
   - `Nova: Parts of Speech:  [('white', 'JJ'), ('dwarf', 'NN')]`
 - Nova recognizes synonyms of the word "bye" and uses them to find out when the user is done asking questions
+- Nova speaks every language that Google translate understands, just speak your native language to her and she'll respond in kind
+- Nova can look up information on Wikipedia when she doesn't understnad a question and provide the user with a short snippet and a link to the full article
 
 # Limitations
 
@@ -64,6 +66,7 @@ You will need to download and install NLTK and Spacy in your python IDE before u
 - Nova is somewhat limited to the predefined questions and responses in the corpus.txt. The corpus.txt will have to be expanded to allow Nova to answer more questions.
   - `Input: what is a megabyte?`
   - `Nova: I do not understand your question`
+- Only English language Wikipedia is supported, so queries Nova doesn't understand in any language other than English will return the query from English Wikipedia
 
 # New Features 
 
@@ -74,3 +77,5 @@ You will need to download and install NLTK and Spacy in your python IDE before u
 - Added synonym recognition. NovaBot now will close whenever a user inputs synonyms of the word "bye". Previously, the user could only terminate the program is they typed the word "goodbye" so this addition allows them more flexibility.
 - Added POS-tagging. This feature was to be used to extract words that seemed unnecessary during the preprocessing. However, the feature was not used since the alternative NLP tools that we implemented already took care of those words.
 - Added a function from Phrasal that normalized sentences. This feature allows NovaBot to recognize user input even if it contains special characters, apostrophes or extra spaces. It is just another feature to help NovaBot recognize more user inputs.
+- Added the capability to understand every language that Goole Translate supports and respond in that language
+- Added the ability to look up information on Wikipedia to support Nova's knowledge base
