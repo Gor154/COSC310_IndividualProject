@@ -11,7 +11,7 @@ We chose to use the incremental development life cycle. This life cycle is ideal
 
 # How does Nova work?
 
-Nova was developed in python and uses natural language processing to understand and converse with the user. She takes the input from the user and cleans the sentences into a condensed and easily-readable format. She then compares the input to the questions she has in her questionbank and gives a response based on the similarity between the input and questionbank questions. All the questions and responses are found inside the corpus.txt file and may be expanded or changed as more astronomy or geography questions are thought of. 
+Nova was developed in python and uses natural language processing to understand and converse with the user. She takes the input from the user and cleans the sentences into a condensed and easily-readable format. As part of the cleaning, Nova checks if the users question is in English and if not, translates it into English so she can understand it. She then compares the input to the questions she has in her questionbank and gives a response based on the similarity between the input and questionbank questions. All the questions and responses are found inside the corpus.txt file and may be expanded or changed as more astronomy or geography questions are thought of. Nova also has the ability to query wikipedia when she doesn't understand a question Once Nova chooses a proper response she checks whcih language the user asked the question in and translaters her question into the target language.
 
 # Requirements
 
@@ -21,6 +21,8 @@ You will need to download and install NLTK and Spacy in your python IDE before u
 - `pip install -U spacy`
 - `python -m spacy download en_core_web_lg`
 - `pip install pyspellchecker`
+- `pip install beautifulsoup4`
+- `Sadly the translation functions aren't available on other machines as the API key used is stored in a local .json file which can't be published online for security reasons`
 
 # Sections
 
@@ -29,6 +31,8 @@ You will need to download and install NLTK and Spacy in your python IDE before u
 - **Processor**: This section takes the preprocessed data and tries to match it with its accurate response
 - **Main**: This section introduces the user, takes their input, generates the GUI, and manages how the program executes 
 - **norm_punc**: This section was taken from the Phrasal library. It normalizes sentences by removing elements such as special characters, extra spaces and apostrophes. 
+- **translation**: This section handles requests to translate text into a target language or to identify the language of a query
+- **wikipedia**: This section handles requests sent to wikipedia for information Nova doesn't know
 
 `Corpus` --> `Preprocessor` --> `Processor` --> `Main`
 
