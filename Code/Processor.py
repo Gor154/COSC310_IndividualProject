@@ -2,6 +2,7 @@ import Preprocessor
 import en_core_web_lg
 import random
 import translate
+import wikipedia
 
 # Takes in the user input, as formated by the Preprocessor file, and analyzes the input to determine what the best response would be.
 
@@ -57,8 +58,8 @@ def process(sentence, doc_2, answer):  # Processes user input and outputs the co
 
     else:
         if (foreign_indicator == 1):
-            return translate.translate_text(detected_lang,random.choice(invalid_responses))
+            return (translate.translate_text(detected_lang,random.choice(invalid_responses))+"\n"+wikipedia.search(sentence))
         else:
-            return random.choice(invalid_responses)
+            return (random.choice(invalid_responses)+"\n"+wikipedia.search(sentence))
 
 
