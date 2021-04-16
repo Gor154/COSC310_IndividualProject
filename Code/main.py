@@ -5,7 +5,7 @@ import tkinter
 from tkinter import *
 import nltk
 from nltk.corpus import wordnet
-
+import translate
 
 def blockPrint():  # Remove all the printing onto console when chatbot is loading
     sys.stdout = open(os.devnull, 'w')
@@ -49,7 +49,10 @@ def event_enter(key):
 def Enter_pressed():
 
     input_get = You.get()
-    if input_get.lower() in bye_synonyms:
+    input_test = input_get.lower()
+    if (translate.detect_language(input_test) != "en"):
+        input_test = translate.translate_text("EN", input_test)
+    if input_test in bye_synonyms:
         quit()
     else:
         messages.insert(END, "You: " + '%s\n' % input_get)

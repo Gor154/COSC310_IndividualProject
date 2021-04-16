@@ -1,7 +1,7 @@
 import Preprocessor
 import en_core_web_lg
 import random
-
+import translate
 
 # Takes in the user input, as formated by the Preprocessor file, and analyzes the input to determine what the best response would be.
 
@@ -13,6 +13,7 @@ def preprocess(sentence):  # Uses functions in Preprocessor.py to format sentenc
     preprocessed_sentence = cleaned_sentence
     #print(preprocessed_sentence)
     return preprocessed_sentence
+
 
 
 def vectorizer(question):  # Turns questions into a vectorized list
@@ -31,6 +32,13 @@ def process(sentence, doc_2, answer):  # Processes user input and outputs the co
     similarity_index = 0
     index = 0
     nlp = en_core_web_lg.load()
+    foreign_indicator = 0
+    #This is where input is translated into English
+    detected_lang = translate.detect_language(sentence)
+    if(detected_lang!="en"):
+        sentence = translate.translate_text("EN",sentence)
+        foreign_indicator = 1
+
     doc_1 = nlp(preprocess(sentence))
     similarity = 0
 
@@ -42,9 +50,15 @@ def process(sentence, doc_2, answer):  # Processes user input and outputs the co
             similarity_index = similarity
             index = i
     if similarity_index > 0.60:
-        return answer[index]
+        if(foreign_indicator == 1):
+            return translate.translate_text(detected_lang,answer[index])
+        else:
+            return answer[index]
 
     else:
-        return random.choice(invalid_responses)
+        if (foreign_indicator == 1):
+            return translate.translate_text(detected_lang,random.choice(invalid_responses))
+        else:
+            return random.choice(invalid_responses)
 
 
